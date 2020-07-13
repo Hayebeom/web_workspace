@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>객체</h1>
+	
+	<script type="text/javascript">
+		var person = {
+				firstName: "Steven",
+				lastName: "King",
+				fullName: function() {
+					console.log("this에 들어있는 객체 -> ", this);
+					return this.firstName + " " + this.lastName;
+				}
+		}
+		
+		var employee = {
+				firstName: "홍",
+				lastName: '길동',
+				salary: 360000
+		}
+		
+		var personName = person.fullName();
+		console.log("사람이름", personName);
+		
+		// apply()는 다른 객체의 메서드를 사용할 수 있게 함
+		// employee객체가 person 객체의 fullName() 메서드를 사용할 수 있게 함
+		// fullName() 메서드의 실행 주체가 employee 객체가 되게 함
+		//  ㄴ fullName() 메서드의 this에 employee객체가 전달됨
+		
+		var empName = person.fullName.apply(employee);
+		console.log("사원이름", empName);
+		
+	</script>
+</body>
+</html>
