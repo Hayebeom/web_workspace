@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>배열의 주요 메서드</h1>
+	
+	
+<script type="text/javascript">
+	var numbers = [1, 2, 3, 4, 5, 6];
+	
+	// 배열의 값을 제곱한 새로운 배열 생성
+	var numbers2 = numbers.map(function (item, index) {
+		return item*item;
+	});
+	
+	console.log(numbers2);
+	
+	// .forEach : 하나씩 꺼냄
+	// .filter  : 조건 (ex.짝수만)
+	// .map 	: 기존값을 변환한 새로운 배열 생성
+	
+	// 장학금을 받는 학생의 이름을 조회
+	var students = [
+		{name:"홍길동", score:74},
+		{name:"김유신", score:59},
+		{name:"강감찬", score:90},
+		{name:"이순신", score:60},
+		{name:"류관순", score:100}
+	];
+	
+	var highScoreStudentNames = students.filter(function (student, index) {
+		return student.score >= 90;
+	}).map(function(student, index) {
+		return student.name
+	});
+	
+	console.log("장학금 수여 대상자", highScoreStudentNames);
+	
+	
+</script>	
+</body>
+</html>

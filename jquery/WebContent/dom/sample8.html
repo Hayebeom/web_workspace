@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+
+	.form-group {
+		margin-bottom: 10px;
+	}
+	
+	.form-group label {
+		display: inline-block;
+		width: 150px;
+		font-weight: bolder;
+	}
+	
+	.form-group input {
+		border: 1px solid #ccc;
+		height: 25px;
+		border-radius: 4px;
+	}
+	
+	.form-group input.get-focus {
+		background-color: lightgreen;
+		border-color: green;
+	}
+	
+	div.box {
+		margin-bottom: 15px;
+		border: 1px solid red;
+		padding: 10px;
+	}
+	
+	div.row {
+		margin-bottom: 15px;
+	}
+	
+	div.row .header {
+		font-weight: bolder;
+		padding: 10px;
+		border: 1px solid #bbb;
+		margin-bottom: 5px;
+	}
+	
+	div.row .header.highlight {
+		background-color: black;
+		color: white;
+		
+	}
+	
+	div.row .content {
+		padding: 10px;
+		border: 1px solid #bbb;
+		display: none;
+	}
+	
+	div.row .content.view {
+		display: block;
+	}
+</style>
+</head>
+<body>
+	<h1>엘리먼트의 클래스 조작</h1>
+	
+	<h3>포커스를 획득한 입력요소 하이라이트 시키기</h3>
+	<div>
+		<form>
+			<div class="form-group">
+				<label>아이디</label>
+				<input type="text" name="userid" />
+			</div>
+			<div class="form-group">
+				<label>비밀번호</label>
+				<input type="password" name="userpwd" />
+			</div>
+		</form>
+	</div>
+	
+	<div class="box">
+		<div class="row">
+			<div class="header">결제 취소는 가능한가요?</div>
+			<div class="content">
+				<h4>결제취소 관련 안내</h4>
+				<p>결제된 주문은 취소 불가능합니다</p>
+				<p>결제된 주문은 취소 불가능합니다</p>
+				<p>결제된 주문은 취소 불가능합니다</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="header">배송 기간은 얼마나 소요되나요?</div>
+			<div class="content">
+				<h4>배송기간 관련 안내</h4>
+				<p>고객님의 거주지에 따라 변동됩니다</p>
+				<p>고객님의 거주지에 따라 변동됩니다</p>
+				<p>고객님의 거주지에 따라 변동됩니다</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="header">구매금액별 포인트 지급은 어떻게 되나요?</div>
+			<div class="content">
+				<h4>포인트 지급 관련 안내</h4>
+				<p>금액별 포인트의 0.1% 적립입니다</p>
+				<p>금액별 포인트의 0.1% 적립입니다</p>
+				<p>금액별 포인트의 0.1% 적립입니다</p>
+			</div>
+		</div>
+	</div>
+	
+<script type="text/javascript" src="../resources/js/jquery/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+
+	$(function() {
+		$(".form-group input").focus(function() {
+			$(this).addClass("get-focus")
+		});
+		
+		$(".form-group input").blur(function() {
+			$(this).removeClass("get-focus")
+		});
+		
+		$(".row .header").click(function() {
+//			$(this).next().addClass('view');	이 상황에선 add말고 toggle
+			//$(this).toggleClass('highlight');
+			//$(this).next().toggleClass('view'); 밑의 한 줄로 축약 가능 (메서드 체이닝)
+			
+			$(this).toggleClass('highlight').next().toggleClass('view');
+		})
+		
+	});
+		
+</script>
+</body>
+</html>

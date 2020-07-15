@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+
+<script type="text/javascript" src="../resources/js/jquery/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">	
+$(function() {
+	$.get("server/sample2.jsp", function(customer) {
+		console.log(customer.name);
+		console.log(customer.tel);
+		console.log(customer.email);
+		console.log(customer.age);
+		console.log(customer.married);
+		console.log(customer.family);
+		console.log(customer.family[0]);
+		console.log(customer.family[1]);
+		console.log(customer.family[2]);
+	})
+})
+</script>
+</body>
+</html>

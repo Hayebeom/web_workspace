@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	.form-group {
+		border: 1px dashed #ddd;
+		margin-bottom: 10px;
+		padding: 15px;
+	}
+	
+	.form-group label {
+		display: block;
+		font-weight: bolder;
+		margin-bottom: 5px;
+	}
+	
+	.form-group .form-control {
+		width: 100%;
+		border: 1px solid #ccc;
+			border-radius: 5px;
+	}
+	
+	.form-group input.form-control {
+		height: 25px;
+	}
+</style>
+</head>
+<body>
+	<h1>엘리먼트 추가2</h1>
+	
+	<h3>사진 등록하기</h3>
+	<p>한번에 사진의 최대 5개까지만 등록 가능</p>
+	<form id="form-fileupload">
+		<div class="form-group">
+			<label>제목</label>
+			<input type="text" class="form-control" name="title" />
+		</div>
+		<div class="form-group">
+			<label>설명</label>
+			<textarea rows= "6" class="form-control" name="descriprtion"></textarea>
+		</div>
+		<div class="form-group">
+			<label>사진
+				<button type="button" class="btn btn-default btn-sm" id="btn-add">추가</button>
+				<button type="button" class="btn btn-default btn-sm" id="btn-del" disabled>삭제</button>
+			</label>
+			<input type="file" class="form-control" name="photofile" />
+		</div>
+		
+		<div>
+			<button type="submit" class="btn btn-primary">등록</button>
+		</div>
+	</form>
+<script type="text/javascript" src="../resources/js/jquery/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">	
+	// btn-add 버튼을 클릭하면 사진을 등록할 수 있는 입력요소가 추가됨
+	/*
+		<div class="form-group">
+			<label>사진</label>
+			<input type="file" class="form-control" name="photofile" />
+		</div>
+	*/
+	// 화면에 처음 표시된 것 포함, 최대 5개까지 등록 가능
+	// 5개가 등록되면 btn-add 버튼을 비활성화 시킴 (btn-del로 삭제되면 활성화됨)
+	
+	// btn-del 버튼을 클릭하면 입력요소가 삭제됨
+	// 삭제할 때는 맨 끝부터 삭제
+	// 마지막 한 개가 남았을 때는 비활성화됨 (btn-add로 새로 추가되면 활성화됨)
+	var content = "<div class='form-group'>";
+	content += "<label>사진</label>";
+	content += "<input type='file' class='form-control' name='photofile' />";
+	content += "</div>";
+	
+	$(function() {
+		$("#btn-add").click(function() {
+			// file 입력요소 조회
+			// file 입력요소 총 개수 확인
+			// 첨부파일 입력폼을 포함하고 있는 div.form-group를 전부 검색
+			var $fileFormGroups = $("div.form-group:has(:file)");
+			// 현재 첨부파일 입력폼 개수를 조회
+			var $lastFileFormGroup = $("div.form-group:has(:file):last");
+
+			// file 입력요소 중 맨 마지막 입력요소 알아내기
+			var length = $fileFormGroups.length;
+			
+			// file 입력요소가 5개 미만이면 (현재 첨부파일 입력폼 개수가 5보다 작으면)
+			if (length < 5) {
+
+				// 현재 첨부파일 입력폼 개수가 1을 더한 값이 5와 같다면 추가버튼 활성화
+				if (length + 1 == 5) {
+					// file 입력요소 5개면 (다음번 길이가 5면 4 눌렀을때부터 비활)
+					// btn-add 비활성화
+					$("#btn-add").prop("disabled", true);
+				}	// $(this) 도 가능
+				
+				// 새로운 file 입력요소를 마지막 file 입력요소 다음으로 추가
+				// 첨부파일 입력폼의 맨 마지막 다음에 입력폼을 추가
+				$lastFileFormGroup.after(content);
+			
+				// 첨부파일 입력폼이 추가되었으므로 삭제버튼 활성화
+				$("#btn-del").prop("disabled", false);
+			}
+		});
+		
+		$("#btn-del").click(function() {
+			// 첨부파일 입력폼을 포함하고 있는 div를 전부 검색
+			var $fileFormGroups = $("div.form-group:has(:file)");
+			var $lastFileFormGroup = $("div.form-group:has(:file):last");
+			// 현재 첨부파일 입력폼 개수를 조회
+			var length = $fileFormGroups.length;
+
+			// 현재 첨부파일 입력폼 개수가 1보다 크면
+			if (length > 1) {
+				// 첨부파일 입력폼의 맨 마지막 div를 삭제
+				$lastFileFormGroup.remove();
+				
+				// 첨부파일 입력폼이 삭제되었기 때문에 추가버튼 활성화
+				$("#btn-add").prop("disabled", false);
+			}
+
+			// 현재 첨부파일 입력폼 개수에서 1을 뺀 값이 1과 같으면
+			if (length - 1 == 1) { // 다음번 길이가 1이면 2눌렀을때부터 활성화
+				
+				// 첨부파일 입력폼이 하나만 남은 것이기 때문에 삭제버튼을 비활성화
+				$("#btn-del").prop("disabled", true);
+			}	// $(this) 도 가능
+		});
+	})
+	
+</script>
+</body>
+</html>
